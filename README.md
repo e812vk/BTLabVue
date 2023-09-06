@@ -1,4 +1,5 @@
 # BTLabVue
+Инструкция по разворачиванию сайта на Windows 10 (64-bit).
 
 1. **Установить и настроить MS SQL Express:**
    - Скачать и установить: (https://download.microsoft.com/download/5/1/4/5145fe04-4d30-4b85-b0d1-39533663a2f1/SQL2022-SSEI-Expr.exe)

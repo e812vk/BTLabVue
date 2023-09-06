@@ -16,12 +16,13 @@
 4. **Установить IIS Express** (https://www.microsoft.com/en-US/download/details.aspx?id=48264)
    - IisExpressAdminCmd.exe setupsslUrl -url:https://localhost:PORT/ -UseSelfSigned
 
-6. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows -> "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
-7. Дать доступ группе пользователей 
+5. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows -> "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
 
-8. **Скачать и распаковать папку с публикацией сайта** (https://drive.google.com/file/d/1_gF7EhsbkrSFqGwYuBqhO5di6SFzYkPD/view?usp=sharing)
+6. **Дать доступ на папку с сайтом группе пользователей IIS_IUSRS**
 
-9. **Добавить сайт в IIS:**
+7. **Скачать и распаковать папку с публикацией сайта** (https://drive.google.com/file/d/1_gF7EhsbkrSFqGwYuBqhO5di6SFzYkPD/view?usp=sharing)
+
+8. **Добавить сайт в IIS:**
    - В консоли выполнить команду inetmgr
    - На папке 'сайты' нажать ПКМ -> 'Добавить веб-сайт...'
    - Указать произвольное 'Имя сайта'
@@ -29,7 +30,7 @@
    - Указать тип https и имя узла 'localhost'
    - SSL-сертификат выбрать IIS Express Development Certificate
 
-10. **Проверить работу сайта** (https://localhost)
+9. **Проверить работу сайта** (https://localhost)
 
 
 

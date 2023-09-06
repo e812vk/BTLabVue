@@ -1,13 +1,13 @@
 # BTLabVue
 
-1. **Установить MS SQL Express:**
-Скачать и установить: (https://download.microsoft.com/download/5/1/4/5145fe04-4d30-4b85-b0d1-39533663a2f1/SQL2022-SSEI-Expr.exe)
-Скачать и установить: (https://aka.ms/ssmsfullsetup)
-Запустить SQL Server Management Studio (SMSS)
-Создать базу данных с именем 'btlab'
-В свойствах сервера на вкладке Безопасность выбрать "Проверка подлинности SQL Server и Windows"
-Добавить пользователя с необходимыми правами для редактирования базы 'btlab'
-Отредактировать строку подключения к БД в файле 'appsettings.json' в папке с сайтом
+1. **Установить и настроить MS SQL Express:**
+   - Скачать и установить: (https://download.microsoft.com/download/5/1/4/5145fe04-4d30-4b85-b0d1-39533663a2f1/SQL2022-SSEI-Expr.exe)
+   - Скачать и установить: (https://aka.ms/ssmsfullsetup)
+   - Запустить SQL Server Management Studio (SMSS)
+   - Создать базу данных с именем 'btlab'
+   - В свойствах сервера на вкладке Безопасность выбрать "Проверка подлинности SQL Server и Windows"
+   - Добавить пользователя с необходимыми правами для редактирования базы 'btlab'
+   - Отредактировать строку подключения к БД в файле 'appsettings.json' в папке с сайтом
 
 3. Установить Microsoft .NET 7.0.10 - Windows Server Hosting (https://download.visualstudio.microsoft.com/download/pr/d489c5d0-4d0f-4622-ab93-b0f2a3e92eed/101a2fae29a291956d402377b941f401/dotnet-hosting-7.0.10-win.exe)
 

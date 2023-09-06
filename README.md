@@ -13,7 +13,7 @@
 
 3. **Установить Microsoft .NET 7.0.10 - Windows Server Hosting** (https://download.visualstudio.microsoft.com/download/pr/d489c5d0-4d0f-4622-ab93-b0f2a3e92eed/101a2fae29a291956d402377b941f401/dotnet-hosting-7.0.10-win.exe)
 
-4. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
+4. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows -> "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
 
 5. **Скачать и распаковать папку с публикацией сайта** (https://drive.google.com/file/d/1_gF7EhsbkrSFqGwYuBqhO5di6SFzYkPD/view?usp=sharing)
 

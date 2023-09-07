@@ -41,7 +41,7 @@
 
 2. Основные ошибки IIS связанные с размещением сайта описываются Microsoft (https://learn.microsoft.com/ru-ru/troubleshoot/developer/webapps/iis/health-diagnostic-performance/http-error-500-19-webpage)
    
-3. Решение ошибки SSL-сертификата для localhost с использованием PowerShell:
+3. Решение ошибки SSL-сертификата для localhost с использованием PowerShell (команды выделены курсивом):
    - создаем новый корневой доверенный сертификат:
      _$rootCert = New-SelfSignedCertificate -Subject 'CN=TestRootCA,O=TestRootCA,OU=TestRootCA' -KeyExportPolicy Exportable -KeyUsage CertSign,CRLSign,DigitalSignature -KeyLength 2048 -KeyUsageProperty All -KeyAlgorithm 'RSA' -HashAlgorithm 'SHA256'  -Provider 'Microsoft Enhanced RSA and AES Cryptographic Provider'_
    - создаем сертификат из корневой цепочки доверенных сертификатов:

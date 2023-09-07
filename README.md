@@ -14,7 +14,7 @@
 3. **Установить Microsoft .NET 7.0.10 - Windows Server Hosting** (https://download.visualstudio.microsoft.com/download/pr/d489c5d0-4d0f-4622-ab93-b0f2a3e92eed/101a2fae29a291956d402377b941f401/dotnet-hosting-7.0.10-win.exe)
 
 4. **Установить IIS Express** (https://www.microsoft.com/en-US/download/details.aspx?id=48264)
-   - IisExpressAdminCmd.exe setupsslUrl -url:https://localhost:PORT/ -UseSelfSigned
+   - Обновить сертификат из терминала: IisExpressAdminCmd.exe setupsslUrl -url:https://localhost:443/ -UseSelfSigned
 
 5. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows -> "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
 
@@ -26,6 +26,7 @@
    - В консоли выполнить команду inetmgr
    - На папке 'сайты' нажать ПКМ -> 'Добавить веб-сайт...'
    - Указать произвольное 'Имя сайта'
+   - Пул приложений 'DefaultAppPull'
    - Указать 'Физический путь' (путь до папки, в которой лежит сайт)
    - Указать тип https и имя узла 'localhost'
    - SSL-сертификат выбрать IIS Express Development Certificate
@@ -40,5 +41,7 @@
    - На вкладке SQL Server запустить SQL Server (SQLEXPRESS)
 
 2. Ошибки связанные с размещением сайта описываются Microsoft (https://learn.microsoft.com/ru-ru/troubleshoot/developer/webapps/iis/health-diagnostic-performance/http-error-500-19-webpage)
+   
+3. Предпочтительнее размещать сайт 
   
 

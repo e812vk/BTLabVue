@@ -11,17 +11,17 @@
    - Добавить пользователя с необходимыми правами для редактирования базы 'btlab'
    - Отредактировать строку подключения к БД в файле 'appsettings.json' в папке с сайтом
 
-3. **Установить Microsoft .NET 7.0.10 - Windows Server Hosting** (https://download.visualstudio.microsoft.com/download/pr/d489c5d0-4d0f-4622-ab93-b0f2a3e92eed/101a2fae29a291956d402377b941f401/dotnet-hosting-7.0.10-win.exe)
+2. **Установить Microsoft .NET 7.0.10 - Windows Server Hosting** (https://download.visualstudio.microsoft.com/download/pr/d489c5d0-4d0f-4622-ab93-b0f2a3e92eed/101a2fae29a291956d402377b941f401/dotnet-hosting-7.0.10-win.exe)
 
-4. **Установить IIS Express** - чтобы появился самозаверенный сертификат IIS Express Development Certificate (https://www.microsoft.com/en-US/download/details.aspx?id=48264)
+3. **Установить IIS Express** - чтобы появился самозаверенный сертификат IIS Express Development Certificate (https://www.microsoft.com/en-US/download/details.aspx?id=48264)
 
-5. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows -> "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
+4. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows -> "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
 
-6. **Дать доступ на папку с сайтом группе пользователей IIS_IUSRS**
+5. **Скачать и распаковать папку с публикацией сайта** (https://drive.google.com/file/d/1_gF7EhsbkrSFqGwYuBqhO5di6SFzYkPD/view?usp=sharing)
 
-7. **Скачать и распаковать папку с публикацией сайта** (https://drive.google.com/file/d/1_gF7EhsbkrSFqGwYuBqhO5di6SFzYkPD/view?usp=sharing)
+6. **Дать доступ на папку с сайтом группе пользователей IIS_IUSRS** (ПКМ -> Свойства -> Безопасность -> Изменить -> Добавить -> 'IIS_IUSRS' -> OK -> OK -> OK)
 
-8. **Добавить сайт в IIS:**
+7. **Добавить сайт в IIS:**
    - В консоли выполнить команду inetmgr
    - На папке 'сайты' нажать ПКМ -> 'Добавить веб-сайт...'
    - Указать произвольное 'Имя сайта'
@@ -30,11 +30,12 @@
    - Указать тип https и имя узла 'localhost'
    - SSL-сертификат выбрать IIS Express Development Certificate
 
-9. **Проверить работу сайта** (https://localhost)
+8. **Проверить работу сайта** (https://localhost)
 
 
 
-Возможные ошибки:
+**Возможные ошибки:**
+
 1. **Не работает SQL Server:**
    - Запустить SQL Server Configuration Manager
    - На вкладке SQL Server запустить SQL Server (SQLEXPRESS)
@@ -44,6 +45,7 @@
 3. Решение ошибки SSL-сертификата для localhost с использованием PowerShell (команды выделены курсивом):
    - создаем новый корневой доверенный сертификат:
      _$rootCert = New-SelfSignedCertificate -Subject 'CN=TestRootCA,O=TestRootCA,OU=TestRootCA' -KeyExportPolicy Exportable -KeyUsage CertSign,CRLSign,DigitalSignature -KeyLength 2048 -KeyUsageProperty All -KeyAlgorithm 'RSA' -HashAlgorithm 'SHA256'  -Provider 'Microsoft Enhanced RSA and AES Cryptographic Provider'_
+     
    - создаем сертификат из корневой цепочки доверенных сертификатов:
      _New-SelfSignedCertificate -DnsName "localhost" -FriendlyName "MyCert" -CertStoreLocation "cert:\LocalMachine\My" -Signer $rootCert -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.1") -Provider "Microsoft Strong Cryptographic Provider" -HashAlgorithm "SHA256" -NotAfter (Get-Date).AddYears(10)_
 

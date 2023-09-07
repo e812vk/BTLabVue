@@ -43,18 +43,18 @@
    
 3. Решение ошибки SSL-сертификата для localhost с использованием PowerShell:
    - создаем новый корневой доверенный сертификат:
-      _$rootCert = New-SelfSignedCertificate -Subject 'CN=TestRootCA,O=TestRootCA,OU=TestRootCA' -KeyExportPolicy Exportable -KeyUsage CertSign,CRLSign,DigitalSignature -KeyLength 2048 -KeyUsageProperty All -KeyAlgorithm 'RSA' -HashAlgorithm 'SHA256'  -Provider 'Microsoft Enhanced RSA and AES Cryptographic Provider'_
+     _$rootCert = New-SelfSignedCertificate -Subject 'CN=TestRootCA,O=TestRootCA,OU=TestRootCA' -KeyExportPolicy Exportable -KeyUsage CertSign,CRLSign,DigitalSignature -KeyLength 2048 -KeyUsageProperty All -KeyAlgorithm 'RSA' -HashAlgorithm 'SHA256'  -Provider 'Microsoft Enhanced RSA and AES Cryptographic Provider'_
    - создаем сертификат из корневой цепочки доверенных сертификатов:
-      _New-SelfSignedCertificate -DnsName "localhost" -FriendlyName "MyCert" -CertStoreLocation "cert:\LocalMachine\My" -Signer $rootCert -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.1") -Provider "Microsoft Strong Cryptographic Provider" -HashAlgorithm "SHA256" -NotAfter (Get-Date).AddYears(10)_
+     _New-SelfSignedCertificate -DnsName "localhost" -FriendlyName "MyCert" -CertStoreLocation "cert:\LocalMachine\My" -Signer $rootCert -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.1") -Provider "Microsoft Strong Cryptographic Provider" -HashAlgorithm "SHA256" -NotAfter (Get-Date).AddYears(10)_
 
    - копируем **отпечаток**, возвращенный последней командой
 
    - удаляем последнюю ассоциацию ip/port/cert:
-_netsh http delete sslcert ipport=0.0.0.0:443_
+     _netsh http delete sslcert ipport=0.0.0.0:443_
 
    - привязываем новый сертификат к любому ip и порту 443 (значение appid не имеет значения, подходит любой валидный guid):
-_netsh http add sslcert ipport=0.0.0.0:443 appid='{214124cd-d05b-4309-9af9-9caa44b2b74a}' certhash=**сюда_вставить_отпечаток**_
+     _netsh http add sslcert ipport=0.0.0.0:443 appid='{214124cd-d05b-4309-9af9-9caa44b2b74a}' certhash=**сюда_вставить_отпечаток**_
 
-   - Теперь вам необходимо открыть MMC (в термиинале набрать 'certlm.msc') и перетащить сертификат TestRootCA из подпапки «Личные/Сертификаты» в подпапку «Доверенные корневые центры сертификации/Сертификаты»..
+   - Теперь вам необходимо открыть MMC (в термиинале набрать 'certlm.msc') и перетащить сертификат TestRootCA из подпапки «Личные/Сертификаты» в подпапку «Доверенные корневые центры сертификации/Сертификаты».
   
 

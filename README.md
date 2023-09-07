@@ -13,8 +13,7 @@
 
 3. **Установить Microsoft .NET 7.0.10 - Windows Server Hosting** (https://download.visualstudio.microsoft.com/download/pr/d489c5d0-4d0f-4622-ab93-b0f2a3e92eed/101a2fae29a291956d402377b941f401/dotnet-hosting-7.0.10-win.exe)
 
-4. **Установить IIS Express** (https://www.microsoft.com/en-US/download/details.aspx?id=48264)
-   - Обновить сертификат из терминала: IisExpressAdminCmd.exe setupsslUrl -url:https://localhost:443/ -UseSelfSigned
+4. **Установить IIS Express** чтобы появился самозаверенный сертификат (https://www.microsoft.com/en-US/download/details.aspx?id=48264)
 
 5. **Установить IIS** (appwiz.cpl -> Включение или отключение компонентов Windows -> "Службы IIS") (https://wiki.merionet.ru/articles/ustanovka-iis-servera-na-windows-10)
 
@@ -36,12 +35,27 @@
 
 
 Возможные ошибки:
-1. Не работает SQL Server:
+1. **Не работает SQL Server:**
    - Запустить SQL Server Configuration Manager
    - На вкладке SQL Server запустить SQL Server (SQLEXPRESS)
 
-2. Ошибки связанные с размещением сайта описываются Microsoft (https://learn.microsoft.com/ru-ru/troubleshoot/developer/webapps/iis/health-diagnostic-performance/http-error-500-19-webpage)
+2. Основные ошибки IIS связанные с размещением сайта описываются Microsoft (https://learn.microsoft.com/ru-ru/troubleshoot/developer/webapps/iis/health-diagnostic-performance/http-error-500-19-webpage)
    
-3. Предпочтительнее размещать сайт 
+3. Решение ошибки SSL-сертификата для localhost с использованием PowerShell:
+   - создаем новый корневой доверенный сертификат:
+      $rootCert = New-SelfSignedCertificate -Subject 'CN=TestRootCA,O=TestRootCA,OU=TestRootCA' -KeyExportPolicy Exportable -KeyUsage CertSign,CRLSign,DigitalSignature -KeyLength 2048 -KeyUsageProperty All -KeyAlgorithm 'RSA' -HashAlgorithm 'SHA256'  -Provider 'Microsoft Enhanced RSA and AES Cryptographic Provider'
+
+   - создаем сертификат из корневой цепочки доверенных сертификатов:
+      New-SelfSignedCertificate -DnsName "localhost" -FriendlyName "MyCert" -CertStoreLocation "cert:\LocalMachine\My" -Signer $rootCert -TextExtension @("2.5.29.37={text}1.3.6.1.5.5.7.3.1") -Provider "Microsoft Strong Cryptographic Provider" -HashAlgorithm "SHA256" -NotAfter (Get-Date).AddYears(10)
+
+   - копируем **отпечаток**, возвращенный последней командой
+
+   - удаляем последнюю ассоциацию ip/port/cert:
+netsh http delete sslcert ipport=0.0.0.0:443
+
+   - привязываем новый сертификат к любому ip и порту 443 (значение appid не имеет значения, подходит любой валидный guid):
+netsh http add sslcert ipport=0.0.0.0:443 appid='{214124cd-d05b-4309-9af9-9caa44b2b74a}' certhash=**сюда_вставить_отпечаток**
+
+   - Теперь вам необходимо открыть MMC (в термиинале набрать 'certlm.msc') и перетащить сертификат TestRootCA из подпапки «Личные/Сертификаты» в подпапку «Доверенные корневые центры сертификации/Сертификаты»..
   
 
